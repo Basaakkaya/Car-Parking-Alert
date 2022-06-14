@@ -1,47 +1,81 @@
 // first of all defines pins numbers int trigPin = 3;
 int echoPin = 4;
 int ledPin1 = 9; //green led
-int ledPin2 = 10; //yellow led int ledPin3 = 11; // red led int buzzerPin = 12; //buzzer // defines variables
-long time; long distance;
-void setup() {
+int ledPin2 = 10; //yellow led 
+int ledPin3 = 11; // red led 
+int buzzerPin = 12; //buzzer // defines variables
+long time; 
+long distance;
+
+
+void setup() 
+{
 Serial.begin(9600); // Select Arduino ( 9600 )
-pinMode(trigPin, OUTPUT); // Sets the trigPin pinMode(echoPin, INPUT); // Sets the echoPin pinMode(ledPin1, OUTPUT); // Green led output pinMode(ledPin2, OUTPUT); // Yellow led output pinMode(ledPin3, OUTPUT); // Red led output pinMode(buzzerPin, OUTPUT); // Buzzer output
+pinMode(trigPin, OUTPUT); // Sets the trigPin 
+pinMode(echoPin, INPUT); // Sets the echoPin 
+pinMode(ledPin1, OUTPUT); // Green led output 
+pinMode(ledPin2, OUTPUT); // Yellow led output 
+pinMode(ledPin3, OUTPUT); // Red led output 
+pinMode(buzzerPin, OUTPUT); // Buzzer output
 }
+
 void loop() {
-digitalWrite(trigPin, HIGH); // powering the trig pin and sending the signal. delayMicroseconds(1000); // cut the signal after 1000 milliseconds. digitalWrite(trigPin, LOW); // cut the signal of the trig pin.
+digitalWrite(trigPin, HIGH); // powering the trig pin and sending the signal. 
+delayMicroseconds(1000); // cut the signal after 1000 milliseconds. 
+digitalWrite(trigPin, LOW); // cut the signal of the trig pin.
 time = pulseIn(echoPin, HIGH); // calculate the time until the sound returns to the echo pin and transfer it to the variable named time.
 distance = (time / 2) / 29.1; //HC-SR04 distance calculate codes ( Speed of propagation of sound in air 29.1) (Time= represents the time the sound travels and arrives.)
 // The reason we divide by 2 is to calculate the distance of the obstacle or object from the sensor.
-Serial.println("Distance:"); // Print the serial port screen Serial.println(distance); //distance is the returned integer, it is the distance in cm Serial.println(" cm");
+
+Serial.println("Distance:"); // Print the serial port screen 
+Serial.println(distance); //distance is the returned integer, it is the distance in cm Serial.println(" cm");
 if (distance <= 10)
 {
+
 digitalWrite(ledPin1, LOW); digitalWrite(ledPin2, LOW);
 digitalWrite(ledPin3, HIGH); // turn the RED LED on (HIGH is the voltage level) , ALWAYS ON
-digitalWrite(buzzerPin, HIGH); }
-else if (distance <= 20) {
+digitalWrite(buzzerPin, HIGH); 
+}
+else if (distance <= 20) 
+{
+
 digitalWrite(ledPin1, LOW);
 digitalWrite(ledPin2, LOW);
-digitalWrite(ledPin3, HIGH); // turn the RED LED on (HIGH is the voltage level) digitalWrite(buzzerPin, HIGH);
+digitalWrite(ledPin3, HIGH); // turn the RED LED on (HIGH is the voltage level) 
+digitalWrite(buzzerPin, HIGH);
 delay(100);
 digitalWrite(ledPin3, LOW);
 digitalWrite(buzzerPin, LOW);
 delay(100);
 }
-else if (distance <= 35) {
+else if (distance <= 35) 
+{
+
 digitalWrite(ledPin1, LOW);
-digitalWrite(ledPin2, HIGH); // turn the YELLOW LED on (HIGH is the voltage level) digitalWrite(ledPin3, LOW);
+digitalWrite(ledPin2, HIGH); // turn the YELLOW LED on (HIGH is the voltage level) 
+digitalWrite(ledPin3, LOW);
 digitalWrite(buzzerPin, HIGH);
 delay(150);
 digitalWrite(ledPin2, LOW);
 digitalWrite(buzzerPin, LOW);
 delay(150);
 }
-else if (distance <= 45) {
-digitalWrite(ledPin1, HIGH); // turn the GREEN LED on (HIGH is the voltage level) digitalWrite(ledPin2, LOW);
+else if (distance <= 45) 
+{
+
+digitalWrite(ledPin1, HIGH); // turn the GREEN LED on (HIGH is the voltage level) 
+digitalWrite(ledPin2, LOW);
 digitalWrite(ledPin3, LOW);
 digitalWrite(buzzerPin, HIGH);
-delay(200); digitalWrite(ledPin1, LOW); digitalWrite(buzzerPin, LOW); delay(200);
+delay(200); digitalWrite(ledPin1, LOW); 
+digitalWrite(buzzerPin, LOW); 
+delay(200);
 }
-else // distance > 45 {
-digitalWrite(ledPin1, LOW); digitalWrite(ledPin2, LOW); digitalWrite(ledPin3, LOW); digitalWrite(buzzerPin, LOW);
-} }
+else // distance > 45 
+{
+digitalWrite(ledPin1, LOW); 
+digitalWrite(ledPin2, LOW); 
+digitalWrite(ledPin3, LOW); 
+digitalWrite(buzzerPin, LOW);
+ } 
+}
